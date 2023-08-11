@@ -1,6 +1,8 @@
 import { getAllHashedUrls, getFullUrl } from "@/components/api/apiHelper";
 import { UrlDto } from "@/components/util/UrlDto";
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
@@ -13,8 +15,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 const Url: React.FC<{ dto: UrlDto }> = ({ dto }) => {
-  console.log(dto);
-  return <div>[url]</div>;
+  // const router = useRouter();
+  useEffect(() => {
+    window.location.href = dto.url;
+  }, []);
+
+  return <div>Loading your page...</div>;
 };
 
 export default Url;
