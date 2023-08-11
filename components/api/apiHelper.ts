@@ -34,4 +34,14 @@ export async function getFullUrl(hashUrl: string) {
   }
 }
 
+export async function signUp(username: string, password: string) {
+  try {
+    const res = await api.post("/user/create", { username, password });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 export default api;

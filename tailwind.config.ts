@@ -22,6 +22,7 @@ const config: Config = {
         light_blue: "#3A86FF",
         violet_purple: "#8338EC",
         bright_yellow: "#FFBE0B",
+        bright_pink: "#FF006E",
       },
     },
   },
