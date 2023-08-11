@@ -47,6 +47,8 @@ export default function Home() {
     router.push("/signup");
   };
 
+  const onClickLogin = () => [router.push("/login")];
+
   return (
     <Container>
       <div className="flex flex-col flex-1 p-2 w-full max-w-2xl">
@@ -105,6 +107,12 @@ export default function Home() {
           >
             <p className=" text-lg text-gray-50">Sign up</p>
           </button>
+          <p
+            className="text-sm text-blue-500 self-center hover:cursor-pointer"
+            onClick={onClickLogin}
+          >
+            Already have an account? Login
+          </p>
         </div>
       </div>
     </Container>
