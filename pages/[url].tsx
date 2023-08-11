@@ -1,7 +1,6 @@
-import { getAllHashedUrls, getFullUrl } from "@/components/api/apiHelper";
+import { getFullUrl } from "@/components/api/apiHelper";
 import { UrlDto } from "@/components/util/UrlDto";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
