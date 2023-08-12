@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
@@ -7,6 +8,21 @@ const api = axios.create({
 export async function createAnonUrl(url: string) {
   try {
     const res = await api.post("/jurl/createAnon", { url });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+export async function createCustomUrl(url: string, customUrl: string) {
+  try {
+    const accessToken = Cookies.get("accessToken");
+    const res = await api.post(
+      "/jurl/createCustomUrl",
+      { url, customUrl },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
     return res.data;
   } catch (err) {
     console.log(err);
