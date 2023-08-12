@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import moment from "moment";
+import { useAuth } from "@/components/AuthContext";
 
 //TODO: some weird bug with auto fill not working
 const login = () => {
+  const { user, logout } = useAuth();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +54,10 @@ const login = () => {
       setIsError(true);
     }
   };
+
+  if (user) {
+    router.push("/");
+  }
 
   return (
     <Container>
