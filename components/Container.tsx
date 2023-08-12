@@ -9,7 +9,7 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
   return (
     <div className="bg-light_blue">
       <Header />
-      <div className="mx-auto flex items-center flex-col bg-light_blue min-h-[600px]">
+      <div className="mx-auto flex items-center flex-col bg-light_blue min-h-screen">
         {children}
       </div>
     </div>

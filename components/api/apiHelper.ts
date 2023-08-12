@@ -15,6 +15,23 @@ export async function createAnonUrl(url: string) {
   }
 }
 
+export async function getUsersUrls() {
+  try {
+    const accessToken = Cookies.get("accessToken");
+    console.log(accessToken);
+    console.log({
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    const res = await api.post("/user/urls", undefined, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 export async function createCustomUrl(url: string, customUrl: string) {
   try {
     const accessToken = Cookies.get("accessToken");
