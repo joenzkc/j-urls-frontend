@@ -141,15 +141,17 @@ export default function Home() {
               <span className="border-2 bg-gray-200 border-gray-300 h-10 px-2 text-md rounded-lg flex items-center">
                 <p>{process.env.NEXT_PUBLIC_FRONTEND_URL}</p>
               </span>
-              <input
-                className={`border-2 ${
-                  invalidCustomUrl || error
-                    ? "border-red-500"
-                    : "border-gray-300"
-                } bg-white h-10 px-2 rounded-lg text-md flex-1 focus:outline-none mt-1`}
-                placeholder="Enter your custom link here..."
-                onChange={handleCustomChange}
-              />
+              <div className="flex flex-1 items-center justify-center">
+                <input
+                  className={`border-2 ${
+                    invalidCustomUrl || error
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  } bg-white h-10 px-2 rounded-lg text-md flex-1 focus:outline-none`}
+                  placeholder="Enter your custom link here..."
+                  onChange={handleCustomChange}
+                />
+              </div>
             </div>
             <div className="my-2 flex flex-col flex-1">
               {invalidCustomUrl ? (
