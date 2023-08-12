@@ -21,47 +21,34 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  let user = null;
-  api
-    .post("auth/verifyToken", undefined, {
+  try {
+    const res = await api.post("auth/verifyToken", undefined, {
       headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((res) => {
-      const dto = plainToClass(UserDto, res.data);
-      user = dto;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {
-        redirect: {
-          destination: "/login",
-          permanent: false,
-        },
-      };
     });
-  return {
-    props: { user },
-  };
+
+    const { id, username } = res.data;
+    return {
+      props: { user: { id, username } },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 };
 
 const dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
   const router = useRouter();
-
-  console.log(user);
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     console.log(user);
-  //     router.push({ pathname: "/login", query: { unauthorized: true } });
-  //   }
-  // }, [user]);
 
   return (
     // <div>dashboard</div>
     <Container>
       <div className="flex flex-col flex-1 p-2 w-full max-w-2xl">
         <div className="bg-white rounded-md p-4 flex flex-col">
-          <h1>Welcome, {user?.username}</h1>
+          <h1>Welcome, {user.username}</h1>
         </div>
       </div>
     </Container>
