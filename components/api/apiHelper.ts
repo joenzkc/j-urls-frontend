@@ -54,4 +54,14 @@ export async function signIn(username: string, password: string) {
   }
 }
 
+export async function verifyToken(token: string) {
+  try {
+    const res = await api.post("/auth/verifyToken", { token });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 export default api;

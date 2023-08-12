@@ -1,5 +1,6 @@
 // import Container from "postcss/lib/container";
 
+import { useAuth } from "@/components/AuthContext";
 import Container from "@/components/Container";
 import { createAnonUrl } from "@/components/api/apiHelper";
 import { ValidUrlDto } from "@/components/util/ValidUrlDto";
@@ -7,17 +8,27 @@ import { plainToClass } from "class-transformer";
 import { ValidationError, validateOrReject } from "class-validator";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import InfoIcon from "@mui/icons-material/Info";
+import Popup from "@/components/Popup";
 
 export default function Home() {
   const router = useRouter();
+  const { user, logout } = useAuth();
 
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [error, setError] = useState("");
   const [invalidUrl, setInvalidUrl] = useState(false);
+  const [customUrl, setCustomUrl] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
+  };
+
+  const handleCustomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomUrl(e.target.value);
   };
 
   const onClickShorten = async () => {
@@ -41,6 +52,7 @@ export default function Home() {
     // copy to clipboard the test in the span
     const text = `${process.env.NEXT_PUBLIC_FRONTEND_URL}${shortUrl}`;
     navigator.clipboard.writeText(text);
+    console.log(user);
   };
 
   const onClickSignUp = () => {
@@ -99,21 +111,65 @@ export default function Home() {
           <></>
         )}
 
-        <div className="bg-white rounded-md mt-2 p-4 flex flex-col">
-          <p>Want to make your own custom URL?</p>
-          <button
-            className="my-2 flex-1 bg-bright_yellow rounded-xl min-h-[3rem]"
-            onClick={onClickSignUp}
-          >
-            <p className=" text-lg text-gray-50">Sign up</p>
-          </button>
-          <p
-            className="text-sm text-blue-500 self-center hover:cursor-pointer"
-            onClick={onClickLogin}
-          >
-            Already have an account? Login
-          </p>
-        </div>
+        {user ? (
+          // <>Welcome back {user.username}</>
+          <div className="bg-white rounded-md mt-2 p-4 flex flex-col">
+            <div className="flex items-center">
+              <p>Create Custom URL</p>
+              {/* <div></div>
+               */}
+              <InfoIcon className="ml-2" onClick={() => setShowPopup(true)} />
+            </div>
+            <div className="mt-1 flex-1 grid container grid-cols-1 md:grid-cols-2">
+              <span className="border-2 bg-white border-gray-300 h-10 px-2 text-md rounded-lg flex items-center">
+                <p>{process.env.NEXT_PUBLIC_FRONTEND_URL}</p>
+              </span>
+              <input
+                className={`border-2 ${
+                  invalidUrl || error ? "border-red-500" : "border-gray-300"
+                } bg-white h-10 px-2 pr-16 rounded-lg text-md flex-1 focus:outline-none`}
+                type="search"
+                name="search"
+                placeholder="Enter your link here..."
+                onChange={handleCustomChange}
+              />
+            </div>
+            <div className="my-2 flex flex-col flex-1">
+              {invalidUrl ? (
+                <p className="text-red-500 mb-2">Invalid url</p>
+              ) : (
+                ""
+              )}
+              <button
+                className="flex-1 bg-bright_pink rounded-xl min-h-[3rem]"
+                onClick={onClickShorten}
+              >
+                <p className=" text-lg text-gray-50">Shorten!</p>
+              </button>
+            </div>
+            {showPopup && (
+              <Popup setShowPopup={setShowPopup}>
+                <p>Th</p>
+              </Popup>
+            )}
+          </div>
+        ) : (
+          <div className="bg-white rounded-md mt-2 p-4 flex flex-col">
+            <p>Want to make your own custom URL?</p>
+            <button
+              className="my-2 flex-1 bg-bright_yellow rounded-xl min-h-[3rem]"
+              onClick={onClickSignUp}
+            >
+              <p className=" text-lg text-gray-50">Sign up</p>
+            </button>
+            <p
+              className="text-sm text-blue-500 self-center hover:cursor-pointer"
+              onClick={onClickLogin}
+            >
+              Already have an account? Login
+            </p>
+          </div>
+        )}
       </div>
     </Container>
   );
