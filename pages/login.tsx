@@ -43,7 +43,7 @@ const login = () => {
       const data = await signIn(name, password);
       const token = data.token;
       const expires = moment().add(30, "minutes").toDate();
-      Cookies.set("authToken", token, { expires: expires, sameSite: "lax" });
+      Cookies.set("accessToken", token, { expires: expires, sameSite: "lax" });
       setIsLoading(false);
       setIsLoggedIn(true);
       router.push("/");
