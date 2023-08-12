@@ -47,6 +47,31 @@ export async function createCustomUrl(url: string, customUrl: string) {
   }
 }
 
+export async function getQrCode(urlId: string) {
+  try {
+    const res = await api.post(`/jurl/getUrlQr/${urlId}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+export async function deleteUrl(hashedUrl: string) {
+  try {
+    const accessToken = Cookies.get("accessToken");
+    const res = await api.post(
+      "/jurl/delete",
+      { hashedUrl },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 export async function getAllHashedUrls() {
   try {
     const res = await api.get("/jurl/all");
