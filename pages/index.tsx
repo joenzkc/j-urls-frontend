@@ -7,10 +7,11 @@ import { ValidUrlDto } from "@/components/util/ValidUrlDto";
 import { plainToClass } from "class-transformer";
 import { ValidationError, validateOrReject } from "class-validator";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import Popup from "@/components/Popup";
 import { validateCustomString } from "@/components/util/util";
+import { Transition } from "react-transition-group";
 
 export default function Home() {
   const router = useRouter();
@@ -24,7 +25,16 @@ export default function Home() {
   const [customUrl, setCustomUrl] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [showCopyPopup, setShowCopyPopup] = useState(false);
+  const [showLoggedOutPopup, setShowLoggedOutPopup] = useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    console.log(router.query);
+    if (router.query.logout) {
+      setShowLoggedOutPopup(true);
+      setTimeout(() => setShowLoggedOutPopup(false), 2000);
+    }
+  }, [router.query]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
@@ -203,6 +213,13 @@ export default function Home() {
         {showCopyPopup && (
           <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded">
             Copied to clipboard!
+          </div>
+        )}
+        {showLoggedOutPopup && (
+          <div className="fixed bottom-4 right-4">
+            <div className="bg-red-500 bg-opacity-100 text-white p-4 rounded">
+              You have been logged out!
+            </div>
           </div>
         )}
       </div>
