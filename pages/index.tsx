@@ -110,7 +110,7 @@ export default function Home() {
         <div className="flex flex-col flex-1 p-2 w-full max-w-2xl">
           <div className="bg-white rounded-md p-4 flex flex-col shadow-lg">
             <div className=" min-h-[2rem]">
-              <p className="font-lato">
+              <p className="font-lato text-lg">
                 {!user ? "Try shortening a URL!" : "Shorten a URL"}
               </p>
             </div>
@@ -140,11 +140,14 @@ export default function Home() {
 
           {user ? (
             <div className="bg-white rounded-md mt-2 p-4 flex flex-col shadow-lg">
-              <div className="flex items-center font-lato">
+              <div className="flex items-center font-lato text-lg">
                 <p>Create Custom URL</p>
                 {/* <div></div>
                  */}
-                <InfoIcon className="ml-2" onClick={() => setShowPopup(true)} />
+                <InfoIcon
+                  className="ml-2 cursor-pointer"
+                  onClick={() => setShowPopup(true)}
+                />
               </div>
               <div className="mt-1 flex-1 grid container grid-cols-1 md:grid-cols-2">
                 <span className="border-2 bg-gray-200 border-gray-300 h-10 px-2 text-md rounded-lg flex items-center font-lato">
