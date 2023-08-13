@@ -93,6 +93,9 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
         res = await createAnonUrl(url);
       }
       setShortUrl(res.hashUrl);
+      setError("");
+      setInvalidUrl(false);
+      setInvalidCustomUrl(false);
     } catch (err: any) {
       if (err.length > 0) {
         if (
@@ -112,6 +115,7 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
 
   const onClickCustomShorten = async () => {
     try {
+      setIsLoading(true);
       const validUrl = validateCustomString(customUrl);
 
       if (!validUrl) {
@@ -128,6 +132,9 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
       setInvalidCustomUrl(false);
       const res = await createCustomUrl(url, customUrl);
       setShortUrl(res.hashUrl);
+      setError("");
+      setInvalidUrl(false);
+      setInvalidCustomUrl(false);
     } catch (err: any) {
       console.log(err.response.data.error.message);
       if (err.length > 0 && err[0] instanceof ValidationError) {
@@ -142,6 +149,8 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
       else {
         setError("Error creating custom URL");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
