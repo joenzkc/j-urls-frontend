@@ -66,7 +66,7 @@ const signup = () => {
       <Container>
         <form
           onSubmit={handleSubmit}
-          className="flex-flex-col flex-1 p-2 w-full max-w-2xl"
+          className="flex-flex-col flex-1 p-2 w-full max-w-lg"
         >
           {/* <div className="flex flex-col flex-1 p-2 w-full max-w-2xl"> */}
           <div className="grid container grid-cols-1 bg-white rounded-xl p-4 shadow-lg">

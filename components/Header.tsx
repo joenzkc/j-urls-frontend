@@ -33,11 +33,33 @@ const Header = () => {
           </a>
         </div>
         <button
-          className="lg:hidden hover:text-gray-600 focus:outline-none"
+          className="sm:hidden hover:text-gray-600 focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <MenuIcon />
         </button>
+        <div className="hidden sm:block hover:text-gray-600 focus:outline-none">
+          {/* Test */}
+          {user
+            ? loggedInMenu.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="ml-4 px-3 py-2 text-md font-medium text-white rounded-md hover:text-gray-600"
+                >
+                  {item.name}
+                </a>
+              ))
+            : loggedOutMenu.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="ml-4 px-3 py-2 text-md font-medium text-white rounded-md hover:text-gray-600"
+                >
+                  {item.name}
+                </a>
+              ))}
+        </div>
         {isMenuOpen && (
           <div className="absolute right-0 w-48 mt-44">
             <ul className="bg-white shadow-lg rounded-lg py-2">

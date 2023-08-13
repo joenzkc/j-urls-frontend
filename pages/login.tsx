@@ -85,10 +85,10 @@ const login = () => {
       </Head>
       <Container>
         <form
-          className="flex flex-col flex-1 p-2 w-full max-w-2xl"
+          className="flex flex-col flex-1 p-2 w-full max-w-lg"
           onSubmit={handleLogin}
         >
-          <div className="grid container grid-cols-1 bg-white rounded-md p-4">
+          <div className="grid container grid-cols-1 bg-white rounded-xl shadow-lg p-4">
             <h1 className="text-lg font-archivo text-center">Login</h1>
             <div className="">
               <div className="flex flex-col flex-1">
