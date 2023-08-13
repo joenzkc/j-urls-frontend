@@ -89,9 +89,13 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
       setShortUrl(res.hashUrl);
     } catch (err: any) {
       if (err.length > 0) {
-        if (err[0] instanceof ValidationError) {
+        if (
+          err[0] instanceof ValidationError ||
+          err.response.data.message === "Custom URL already exists"
+        ) {
           console.log("validation error");
           setInvalidUrl(true);
+          setError("Custom URL already exists");
         }
       }
       console.log(err);
@@ -119,7 +123,19 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
       const res = await createCustomUrl(url, customUrl);
       setShortUrl(res.hashUrl);
     } catch (err: any) {
-      console.log(err);
+      console.log(err.response.data.error.message);
+      if (err.length > 0 && err[0] instanceof ValidationError) {
+        setInvalidUrl(true);
+        setError("Custom URL already exists");
+      }
+
+      if (err.response.data.error.message === "Custom URL already exists") {
+        setError("Custom URL already exists");
+      }
+      // }
+      else {
+        setError("Error creating custom URL");
+      }
     }
   };
 
@@ -167,6 +183,7 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
               ) : (
                 ""
               )}
+
               <button
                 className="flex-1 bg-violet_purple rounded-xl  font-montserrat min-h-[3rem]"
                 onClick={onClickShorten}
@@ -212,6 +229,11 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
               <div className="my-2 flex flex-col flex-1">
                 {invalidCustomUrl ? (
                   <p className="text-red-500 mb-2 font-lato">Invalid url</p>
+                ) : (
+                  ""
+                )}
+                {error ? (
+                  <p className="text-red-500 font-lato mb-2">{error}</p>
                 ) : (
                   ""
                 )}
