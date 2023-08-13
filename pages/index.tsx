@@ -14,6 +14,7 @@ import { validateCustomString } from "@/components/util/util";
 import { Transition } from "react-transition-group";
 import Head from "next/head";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import LoadingComponent from "@/components/loadingComponent";
 
 export default function Home() {
   const router = useRouter();
@@ -28,6 +29,7 @@ export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
   const [showCopyPopup, setShowCopyPopup] = useState(false);
   const [showLoggedOutPopup, setShowLoggedOutPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -48,8 +50,10 @@ export default function Home() {
 
   const onClickShorten = async () => {
     try {
+      setIsLoading(true);
       const dto: ValidUrlDto = plainToClass(ValidUrlDto, { url });
       await validateOrReject(dto);
+      setInvalidUrl(false);
       const res = await createAnonUrl(url);
       setShortUrl(res.hashUrl);
     } catch (err: any) {
@@ -60,6 +64,8 @@ export default function Home() {
         }
       }
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -134,7 +140,13 @@ export default function Home() {
                 className="flex-1 bg-violet_purple rounded-xl  font-montserrat min-h-[3rem]"
                 onClick={onClickShorten}
               >
-                <p className=" text-lg text-gray-50">Shorten!</p>
+                {isLoading ? (
+                  <div className="flex flex-1 justify-center items-center">
+                    <LoadingComponent />
+                  </div>
+                ) : (
+                  <p className=" text-lg text-gray-50">Shorten!</p>
+                )}
               </button>
             </div>
           </div>
@@ -176,9 +188,15 @@ export default function Home() {
                   className="flex-1 bg-bright_pink rounded-xl min-h-[3rem]"
                   onClick={onClickCustomShorten}
                 >
-                  <p className=" text-lg text-gray-50 font-montserrat">
-                    Shorten!
-                  </p>
+                  {isLoading ? (
+                    <div className="flex flex-1 justify-center items-center">
+                      <LoadingComponent />
+                    </div>
+                  ) : (
+                    <p className=" text-lg text-gray-50 font-montserrat">
+                      Shorten!
+                    </p>
+                  )}
                 </button>
               </div>
               {showPopup && (
