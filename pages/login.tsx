@@ -113,7 +113,7 @@ const Login = () => {
                 <input
                   type="password"
                   className="bg-gray-50 border border-gray-400 rounded-lg px-2 h-10 focus:outline-none"
-                  placeholder="Enter your name"
+                  placeholder="Enter your password"
                   ref={passwordElement}
                   onInput={handleChangePassword}
                 />

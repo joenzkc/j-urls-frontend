@@ -132,9 +132,7 @@ const Dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
                     >
                       <div className="flex flex-1">
                         <a
-                          href={
-                            process.env.NEXT_PUBLIC_FRONTEND_URL + url.hashUrl
-                          }
+                          href={url.hashUrl}
                           className="font-lato text-lg font-bold truncate hover:text-gray-500"
                         >
                           {process.env.NEXT_PUBLIC_FRONTEND_URL}
