@@ -2,7 +2,10 @@
 
 import { useAuth } from "@/components/AuthContext";
 import Container from "@/components/Container";
-import { createAnonUrl, createCustomUrl } from "@/components/api/apiHelper";
+import api, {
+  createAnonUrl,
+  createCustomUrl,
+} from "@/components/api/apiHelper";
 import { ValidUrlDto } from "@/components/util/ValidUrlDto";
 import { plainToClass } from "class-transformer";
 import { ValidationError, validateOrReject } from "class-validator";
@@ -15,10 +18,39 @@ import { Transition } from "react-transition-group";
 import Head from "next/head";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LoadingComponent from "@/components/loadingComponent";
+import { UserDto } from "@/components/util/UserDto";
+import { GetServerSideProps } from "next";
 
-export default function Home() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // const { user } = useAuth();
+  const token = context.req.cookies.accessToken;
+
+  if (!token) {
+    return { props: { user: null } };
+  }
+
+  try {
+    const res = await api.post("auth/verifyToken", undefined, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const { id, username } = res.data;
+    return {
+      props: { user: { id, username } },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+};
+
+const Home: React.FC<{ user: UserDto }> = ({ user }) => {
   const router = useRouter();
-  const { user, logout } = useAuth();
+  // const { user, logout } = useAuth();
 
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
@@ -30,7 +62,6 @@ export default function Home() {
   const [showCopyPopup, setShowCopyPopup] = useState(false);
   const [showLoggedOutPopup, setShowLoggedOutPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // console.log(router.query);
@@ -257,4 +288,6 @@ export default function Home() {
       </Container>
     </>
   );
-}
+};
+
+export default Home;
