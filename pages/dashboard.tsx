@@ -58,25 +58,8 @@ const Dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
   const [showSuccessfulDelete, setShowSuccessfulDelete] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   setIsLoading(true);
-
-  //   getUsersUrls()
-  //     .then((res) => {
-  //       setUrls(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //     });
-  // });
-
   useEffect(() => {
+    setIsLoading(true);
     if (!user) {
       return;
     }
@@ -88,6 +71,9 @@ const Dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [showSuccessfulDelete, user]);
 
