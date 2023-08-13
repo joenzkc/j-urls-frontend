@@ -136,7 +136,7 @@ const Login = () => {
 
             <div>
               <button
-                className="bg-bright_pink rounded-xl mt-2 min-h-[3rem] w-full"
+                className="bg-bright_pink rounded-xl mt-3 min-h-[3rem] w-full"
                 // onClick={onClickLogin}
                 type="submit"
               >

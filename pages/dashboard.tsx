@@ -133,6 +133,7 @@ const Dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
                       <div className="flex flex-1">
                         <a
                           href={url.hashUrl}
+                          target="_blank"
                           className="font-lato text-lg font-bold truncate hover:text-gray-500"
                         >
                           {process.env.NEXT_PUBLIC_FRONTEND_URL}
@@ -142,6 +143,7 @@ const Dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
                       <div className="flex flex-1">
                         <a
                           href={url.url}
+                          target="_blank"
                           className="font-lato text-sm text-bright_pink truncate hover:text-pink-400"
                         >
                           {url.url}
