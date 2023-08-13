@@ -1,10 +1,12 @@
 import Container from "@/components/Container";
-import { signUp } from "@/components/api/apiHelper";
+import { signIn, signUp } from "@/components/api/apiHelper";
 import { LoginDto } from "@/components/util/LoginDto";
 import { validateOrReject } from "class-validator";
+import moment from "moment";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -44,8 +46,17 @@ const Signup = () => {
       setUserTaken(false);
       setIsSignedUp(true);
       setTimeout(() => {
-        router.push("/login");
-      }, 3000);
+        signIn(name, password).then((res) => {
+          // const data = await signIn(name, password);
+          const token = res.token;
+          const expires = moment().add(30, "minutes").toDate();
+          Cookies.set("accessToken", token, {
+            expires: expires,
+            sameSite: "lax",
+          });
+          router.push("/");
+        });
+      }, 1000);
     } catch (err: any) {
       if (err.response.data.errorType === "QueryFailedError") {
         setUserTaken(true);
@@ -136,7 +147,7 @@ const Signup = () => {
             {isSignedUp ? (
               <div>
                 <p className="text-green-500 mt-1">
-                  You have successfully signed up! Redirecting to login page...
+                  You have successfully signed up! Signing in...
                 </p>
               </div>
             ) : (
