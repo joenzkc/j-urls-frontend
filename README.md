@@ -1,10 +1,10 @@
 # Welcome
 
-This app was created for GDS DCUBE Technical assessment. The website can be accessed (here)[jurl.joenz.kim], and the backend repo can be found (here)[https://github.com/joenzkc/j-urls-backend]
+This app was created for GDS DCUBE Technical assessment. The website can be accessed (here)[jurl.joenz.kim], and the backend repo can be found [here](https://github.com/joenzkc/j-urls-backend)
 
 ## A short note
 
-Thank you for taking a look at my assignment! Before doing this assessment, I actually did the technical assessment for ACE, which can be found at (here)[survey.joenz.kim]. While doing that technical assessment, I think I learned a lot about frontend development and I tried my best to apply whatever I learned here to make my page more mobile responsive (the other website is not really very mobile response).
+Thank you for taking a look at my assignment! Before doing this assessment, I actually did the technical assessment for ACE, which can be found at [here](survey.joenz.kim). While doing that technical assessment, I think I learned a lot about frontend development and I tried my best to apply whatever I learned here to make my page more mobile responsive (the other website is not really very mobile response).
 
 Thanks for taking a look!
 
