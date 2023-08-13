@@ -1,38 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Welcome
 
-## Getting Started
+This app was created for GDS DCUBE Technical assessment. The website can be accessed (here)[jurl.joenz.kim], and the backend repo can be found (here)[https://github.com/joenzkc/j-urls-backend]
 
-First, run the development server:
+## A short note
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Thank you for taking a look at my assignment! Before doing this assessment, I actually did the technical assessment for ACE, which can be found at (here)[survey.joenz.kim]. While doing that technical assessment, I think I learned a lot about frontend development and I tried my best to apply whatever I learned here to make my page more mobile responsive (the other website is not really very mobile response).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Thanks for taking a look!
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Setup
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. Follow the instructions at (the backend repository) to setup your server first
+2. Clone this repository:
+   `git clone https://github.com/joenzkc/jsurvey-frontend.git`
+3. Run `npm i` to install dependencies
+4. Run your backend server, once that is up, do `npm run dev` to launch the frontend
+5. Visit (localhost:3000)[localhost:3000] to view your website
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Techstack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project was created making use of Next.js and TailwindCSS for components
 
-## Learn More
+I chose to use Next.js as it provides a framework around React.js, which is a very popular library for creating frontend pages. I chose to use TailwindCSS as it allows to me easily write my own components instead of using a components library online. Tailwind also makes it easy to implement mobile responsiveness.
 
-To learn more about Next.js, take a look at the following resources:
+The backend was created making use of koa.js (a framework around express) and Postgres. Koa.js is very unrestrictive in how you framework your backend, and gives you a lot of freedom in how you wish to design it (unlike Nest.js which has a lot of "beliefs") Ultimately, I still followed what I believe to be the best practices for the backend (albeit similar to Nest.js)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is hosted on vercel for the frontend, and render.com for the backend. The database is hosted on supabase.io. I would have chosen to use AWS RDS and AWS Elastic Beanstalk, but I do not have anymore free tier for that...
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Assumptions
 
-## Deploy on Vercel
+1. If two users shorten the same URL, they will get 2 different shortened URLs. However, if the user shortens the same URL twice, they will receive the same shortened URL that they received before
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Sometimes render.com can be very slow with the backend service, so if you are testing the app and its very slow, that could potentially be the reason. I do have a cron-job setup to constantly refresh the backend, but sometimes it fails and could lead in slowness
