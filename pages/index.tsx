@@ -12,6 +12,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import Popup from "@/components/Popup";
 import { validateCustomString } from "@/components/util/util";
 import { Transition } from "react-transition-group";
+import Head from "next/head";
 
 export default function Home() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function Home() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    console.log(router.query);
+    // console.log(router.query);
     if (router.query.logout) {
       setShowLoggedOutPopup(true);
       setTimeout(() => setShowLoggedOutPopup(false), 2000);
@@ -101,132 +102,139 @@ export default function Home() {
   const onClickLogin = () => [router.push("/login")];
 
   return (
-    <Container>
-      <div className="flex flex-col flex-1 p-2 w-full max-w-2xl">
-        <div className="bg-white rounded-md p-4 flex flex-col shadow-lg">
-          <div className=" min-h-[2rem]">
-            <p className="font-lato font-light">Try shortening a URL!</p>
-          </div>
-          <div className="mt-1 flex-1 flex">
-            <input
-              className={`border-2 font-lato ${
-                invalidUrl || error ? "border-red-500" : "border-gray-300"
-              } bg-white h-10 px-2 rounded-lg text-md flex-1 focus:outline-none`}
-              placeholder="Enter your link here..."
-              onChange={handleChange}
-            />
-          </div>
-          <div className="my-2 flex flex-col flex-1">
-            {invalidUrl ? (
-              <p className="text-red-500 font-lato mb-2">Invalid url</p>
-            ) : (
-              ""
-            )}
-            <button
-              className="flex-1 bg-violet_purple rounded-xl  font-montserrat min-h-[3rem]"
-              onClick={onClickShorten}
-            >
-              <p className=" text-lg text-gray-50">Shorten!</p>
-            </button>
-          </div>
-        </div>
-
-        {user ? (
-          <div className="bg-white rounded-md mt-2 p-4 flex flex-col shadow-lg">
-            <div className="flex items-center font-lato">
-              <p>Create Custom URL</p>
-              {/* <div></div>
-               */}
-              <InfoIcon className="ml-2" onClick={() => setShowPopup(true)} />
+    <>
+      <Head>
+        <title>JURL: A URL shortener</title>
+      </Head>
+      <Container>
+        <div className="flex flex-col flex-1 p-2 w-full max-w-2xl">
+          <div className="bg-white rounded-md p-4 flex flex-col shadow-lg">
+            <div className=" min-h-[2rem]">
+              <p className="font-lato">
+                {!user ? "Try shortening a URL!" : "Shorten a URL"}
+              </p>
             </div>
-            <div className="mt-1 flex-1 grid container grid-cols-1 md:grid-cols-2">
-              <span className="border-2 bg-gray-200 border-gray-300 h-10 px-2 text-md rounded-lg flex items-center font-lato">
-                <p>{process.env.NEXT_PUBLIC_FRONTEND_URL}</p>
-              </span>
-              <div className="flex flex-1 items-center justify-center">
-                <input
-                  className={`border-2 ${
-                    invalidCustomUrl || error
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } bg-white h-10 px-2 rounded-lg text-md flex-1 focus:outline-none`}
-                  placeholder="Enter your custom link here..."
-                  onChange={handleCustomChange}
-                />
-              </div>
+            <div className="mt-1 flex-1 flex">
+              <input
+                className={`border-2 font-lato ${
+                  invalidUrl || error ? "border-red-500" : "border-gray-300"
+                } bg-white h-10 px-2 rounded-lg text-md flex-1 focus:outline-none`}
+                placeholder="Enter your link here..."
+                onChange={handleChange}
+              />
             </div>
             <div className="my-2 flex flex-col flex-1">
-              {invalidCustomUrl ? (
-                <p className="text-red-500 mb-2 font-lato">Invalid url</p>
+              {invalidUrl ? (
+                <p className="text-red-500 font-lato mb-2">Invalid url</p>
               ) : (
                 ""
               )}
               <button
-                className="flex-1 bg-bright_pink rounded-xl min-h-[3rem]"
-                onClick={onClickCustomShorten}
+                className="flex-1 bg-violet_purple rounded-xl  font-montserrat min-h-[3rem]"
+                onClick={onClickShorten}
               >
-                <p className=" text-lg text-gray-50 font-montserrat">
-                  Shorten!
-                </p>
+                <p className=" text-lg text-gray-50">Shorten!</p>
               </button>
             </div>
-            {showPopup && (
-              <Popup setShowPopup={setShowPopup}>
-                <p>
-                  Shortened URL cannot have any unauthorized characters, must be
-                  at least 5 characters long and less than 20 characters. It
-                  must also be unique
-                </p>
-              </Popup>
-            )}
           </div>
-        ) : (
-          <div className="bg-white rounded-md mt-2 p-4 flex flex-col font-lato">
-            <p>Want to make your own custom URL?</p>
-            <button
-              className="my-2 flex-1 bg-bright_yellow rounded-xl min-h-[3rem] font-montserrat"
-              onClick={onClickSignUp}
-            >
-              <p className=" text-lg text-gray-50">Sign up</p>
-            </button>
-            <p
-              className="text-sm text-blue-500 self-center hover:cursor-pointer"
-              onClick={onClickLogin}
-            >
-              Already have an account? Login
-            </p>
-          </div>
-        )}
-        {shortUrl !== "" ? (
-          <div className="bg-white rounded-md mt-2 p-4 flex flex-col min-h-[6rem] font-lato shadow-lg">
-            <p>Your shortened url is:</p>
-            <span className="bg-gray-200 border-2 border-gray-300 flex-1 h-10 px-2 rounded-lg text-md flex justify-center items-center">
-              <p className="truncate flex-1">
-                {process.env.NEXT_PUBLIC_FRONTEND_URL}
-                {shortUrl}
+
+          {user ? (
+            <div className="bg-white rounded-md mt-2 p-4 flex flex-col shadow-lg">
+              <div className="flex items-center font-lato">
+                <p>Create Custom URL</p>
+                {/* <div></div>
+                 */}
+                <InfoIcon className="ml-2" onClick={() => setShowPopup(true)} />
+              </div>
+              <div className="mt-1 flex-1 grid container grid-cols-1 md:grid-cols-2">
+                <span className="border-2 bg-gray-200 border-gray-300 h-10 px-2 text-md rounded-lg flex items-center font-lato">
+                  <p>{process.env.NEXT_PUBLIC_FRONTEND_URL}</p>
+                </span>
+                <div className="flex flex-1 items-center justify-center">
+                  <input
+                    className={`border-2 ${
+                      invalidCustomUrl || error
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } bg-white h-10 px-2 rounded-lg text-md flex-1 focus:outline-none`}
+                    placeholder="Enter your custom link here..."
+                    onChange={handleCustomChange}
+                  />
+                </div>
+              </div>
+              <div className="my-2 flex flex-col flex-1">
+                {invalidCustomUrl ? (
+                  <p className="text-red-500 mb-2 font-lato">Invalid url</p>
+                ) : (
+                  ""
+                )}
+                <button
+                  className="flex-1 bg-bright_pink rounded-xl min-h-[3rem]"
+                  onClick={onClickCustomShorten}
+                >
+                  <p className=" text-lg text-gray-50 font-montserrat">
+                    Shorten!
+                  </p>
+                </button>
+              </div>
+              {showPopup && (
+                <Popup setShowPopup={setShowPopup}>
+                  <p>
+                    Shortened URL cannot have any unauthorized characters, must
+                    be at least 5 characters long and less than 20 characters.
+                    It must also be unique
+                  </p>
+                </Popup>
+              )}
+            </div>
+          ) : (
+            <div className="bg-white rounded-md mt-2 p-4 flex flex-col font-lato">
+              <p>Want to make your own custom URL?</p>
+              <button
+                className="my-2 flex-1 bg-bright_yellow rounded-xl min-h-[3rem] font-montserrat"
+                onClick={onClickSignUp}
+              >
+                <p className=" text-lg text-gray-50">Sign up</p>
+              </button>
+              <p
+                className="text-sm text-blue-500 self-center hover:cursor-pointer"
+                onClick={onClickLogin}
+              >
+                Already have an account? Login
               </p>
-              <img
-                alt=""
-                src="/content-copy.png"
-                className="self-center w-6 h-6 hover:cursor-pointer"
-                onClick={onClickCopy}
-              />
-            </span>
-          </div>
-        ) : (
-          <></>
-        )}
-        {showCopyPopup && (
-          <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded font-lato">
-            Copied to clipboard!
-          </div>
-        )}
-        {showLoggedOutPopup && (
-          <div className="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded font-lato ">
-            <div className="">You have been logged out!</div>
-          </div>
-        )}
-      </div>
-    </Container>
+            </div>
+          )}
+          {shortUrl !== "" ? (
+            <div className="bg-white rounded-md mt-2 p-4 flex flex-col min-h-[6rem] font-lato shadow-lg">
+              <p>Your shortened url is:</p>
+              <span className="bg-gray-200 border-2 border-gray-300 flex-1 h-10 px-2 rounded-lg text-md flex justify-center items-center">
+                <p className="truncate flex-1">
+                  {process.env.NEXT_PUBLIC_FRONTEND_URL}
+                  {shortUrl}
+                </p>
+                <img
+                  alt=""
+                  src="/content-copy.png"
+                  className="self-center w-6 h-6 hover:cursor-pointer"
+                  onClick={onClickCopy}
+                />
+              </span>
+            </div>
+          ) : (
+            <></>
+          )}
+          {showCopyPopup && (
+            <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded font-lato">
+              Copied to clipboard!
+            </div>
+          )}
+          {showLoggedOutPopup && (
+            <div className="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded font-lato ">
+              <div className="">You have been logged out!</div>
+            </div>
+          )}
+        </div>
+      </Container>
+    </>
   );
 }
