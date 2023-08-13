@@ -15,6 +15,21 @@ export async function createAnonUrl(url: string) {
   }
 }
 
+export async function createUrl(url: string) {
+  try {
+    const accessToken = Cookies.get("accessToken");
+    const res = await api.post(
+      "/jurl/create",
+      { url },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 export async function getUsersUrls() {
   try {
     const accessToken = Cookies.get("accessToken");

@@ -5,6 +5,7 @@ import Container from "@/components/Container";
 import api, {
   createAnonUrl,
   createCustomUrl,
+  createUrl,
 } from "@/components/api/apiHelper";
 import { ValidUrlDto } from "@/components/util/ValidUrlDto";
 import { plainToClass } from "class-transformer";
@@ -85,7 +86,12 @@ const Home: React.FC<{ user: UserDto }> = ({ user }) => {
       const dto: ValidUrlDto = plainToClass(ValidUrlDto, { url });
       await validateOrReject(dto);
       setInvalidUrl(false);
-      const res = await createAnonUrl(url);
+      let res;
+      if (user) {
+        res = await createUrl(url);
+      } else {
+        res = await createAnonUrl(url);
+      }
       setShortUrl(res.hashUrl);
     } catch (err: any) {
       if (err.length > 0) {
