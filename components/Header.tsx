@@ -25,10 +25,12 @@ const Header = () => {
         <div className="flex lg:flex-1">
           <Link href="/" className="">
             <span>
-              <img
-                className="bg-transparent h-16 w-auto"
+              <Image
+                className="bg-light_blue h-16 w-auto"
                 src="/logo.png"
                 alt="logo"
+                width={64}
+                height={64}
               />
             </span>
           </Link>
