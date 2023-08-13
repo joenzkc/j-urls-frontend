@@ -13,6 +13,7 @@ import Popup from "@/components/Popup";
 import { validateCustomString } from "@/components/util/util";
 import { Transition } from "react-transition-group";
 import Head from "next/head";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 export default function Home() {
   const router = useRouter();
@@ -215,9 +216,7 @@ export default function Home() {
                   {process.env.NEXT_PUBLIC_FRONTEND_URL}
                   {shortUrl}
                 </p>
-                <img
-                  alt=""
-                  src="/content-copy.png"
+                <ContentCopyIcon
                   className="self-center w-6 h-6 hover:cursor-pointer"
                   onClick={onClickCopy}
                 />

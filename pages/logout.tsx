@@ -9,7 +9,7 @@ const Logout = () => {
   useEffect(() => {
     logout();
     router.push({ pathname: "/", query: { logout: true } });
-  }, []);
+  }, [logout, router]);
 
   return <div></div>;
 };

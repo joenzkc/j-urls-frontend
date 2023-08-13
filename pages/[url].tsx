@@ -17,7 +17,7 @@ const Url: React.FC<{ dto: UrlDto }> = ({ dto }) => {
   // const router = useRouter();
   useEffect(() => {
     window.location.href = dto.url;
-  }, []);
+  }, [dto.url]);
 
   return <div>Loading your page...</div>;
 };
