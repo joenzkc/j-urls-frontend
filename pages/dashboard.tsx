@@ -120,8 +120,8 @@ const dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
         <title>JURL: Dashboard</title>
       </Head>
       <Container>
-        <div className="flex flex-col flex-1 p-2 w-full max-w-2xl">
-          <div className="bg-white rounded-md p-4 flex flex-col">
+        <div className="flex flex-col flex-1 w-full p-2 max-w-2xl">
+          <div className="bg-white rounded-md p-5 flex flex-col">
             <h1 className="font-lato font-semibold text-xl">
               Welcome, {user.username}
             </h1>
