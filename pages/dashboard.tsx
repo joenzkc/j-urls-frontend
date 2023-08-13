@@ -56,7 +56,7 @@ const Dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
   const [deletingUrl, setDeletingUrl] = useState<UrlDto>();
   const [showSuccessfulDelete, setShowSuccessfulDelete] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
   //   if (!user) {
