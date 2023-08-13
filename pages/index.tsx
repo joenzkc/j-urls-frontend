@@ -103,13 +103,13 @@ export default function Home() {
   return (
     <Container>
       <div className="flex flex-col flex-1 p-2 w-full max-w-2xl">
-        <div className="bg-white rounded-md p-4 flex flex-col">
+        <div className="bg-white rounded-md p-4 flex flex-col shadow-lg">
           <div className=" min-h-[2rem]">
             <p className="font-lato font-light">Try shortening a URL!</p>
           </div>
           <div className="mt-1 flex-1 flex">
             <input
-              className={`border-2 ${
+              className={`border-2 font-lato ${
                 invalidUrl || error ? "border-red-500" : "border-gray-300"
               } bg-white h-10 px-2 rounded-lg text-md flex-1 focus:outline-none`}
               placeholder="Enter your link here..."
@@ -117,28 +117,30 @@ export default function Home() {
             />
           </div>
           <div className="my-2 flex flex-col flex-1">
-            {invalidUrl ? <p className="text-red-500 mb-2">Invalid url</p> : ""}
+            {invalidUrl ? (
+              <p className="text-red-500 font-lato mb-2">Invalid url</p>
+            ) : (
+              ""
+            )}
             <button
-              className="flex-1 bg-violet_purple rounded-xl min-h-[3rem]"
+              className="flex-1 bg-violet_purple rounded-xl  font-montserrat min-h-[3rem]"
               onClick={onClickShorten}
             >
               <p className=" text-lg text-gray-50">Shorten!</p>
             </button>
           </div>
-          {/* <div className="bg-red-100">Test</div> */}
         </div>
 
         {user ? (
-          // <>Welcome back {user.username}</>
-          <div className="bg-white rounded-md mt-2 p-4 flex flex-col">
-            <div className="flex items-center">
+          <div className="bg-white rounded-md mt-2 p-4 flex flex-col shadow-lg">
+            <div className="flex items-center font-lato">
               <p>Create Custom URL</p>
               {/* <div></div>
                */}
               <InfoIcon className="ml-2" onClick={() => setShowPopup(true)} />
             </div>
             <div className="mt-1 flex-1 grid container grid-cols-1 md:grid-cols-2">
-              <span className="border-2 bg-gray-200 border-gray-300 h-10 px-2 text-md rounded-lg flex items-center">
+              <span className="border-2 bg-gray-200 border-gray-300 h-10 px-2 text-md rounded-lg flex items-center font-lato">
                 <p>{process.env.NEXT_PUBLIC_FRONTEND_URL}</p>
               </span>
               <div className="flex flex-1 items-center justify-center">
@@ -155,7 +157,7 @@ export default function Home() {
             </div>
             <div className="my-2 flex flex-col flex-1">
               {invalidCustomUrl ? (
-                <p className="text-red-500 mb-2">Invalid url</p>
+                <p className="text-red-500 mb-2 font-lato">Invalid url</p>
               ) : (
                 ""
               )}
@@ -163,7 +165,9 @@ export default function Home() {
                 className="flex-1 bg-bright_pink rounded-xl min-h-[3rem]"
                 onClick={onClickCustomShorten}
               >
-                <p className=" text-lg text-gray-50">Shorten!</p>
+                <p className=" text-lg text-gray-50 font-montserrat">
+                  Shorten!
+                </p>
               </button>
             </div>
             {showPopup && (
@@ -177,10 +181,10 @@ export default function Home() {
             )}
           </div>
         ) : (
-          <div className="bg-white rounded-md mt-2 p-4 flex flex-col">
+          <div className="bg-white rounded-md mt-2 p-4 flex flex-col font-lato">
             <p>Want to make your own custom URL?</p>
             <button
-              className="my-2 flex-1 bg-bright_yellow rounded-xl min-h-[3rem]"
+              className="my-2 flex-1 bg-bright_yellow rounded-xl min-h-[3rem] font-montserrat"
               onClick={onClickSignUp}
             >
               <p className=" text-lg text-gray-50">Sign up</p>
@@ -194,7 +198,7 @@ export default function Home() {
           </div>
         )}
         {shortUrl !== "" ? (
-          <div className="bg-white rounded-md mt-2 p-4 flex flex-col min-h-[6rem]">
+          <div className="bg-white rounded-md mt-2 p-4 flex flex-col min-h-[6rem] font-lato shadow-lg">
             <p>Your shortened url is:</p>
             <span className="bg-gray-200 border-2 border-gray-300 flex-1 h-10 px-2 rounded-lg text-md flex justify-center items-center">
               <p className="truncate flex-1">
@@ -213,15 +217,13 @@ export default function Home() {
           <></>
         )}
         {showCopyPopup && (
-          <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded">
+          <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded font-lato">
             Copied to clipboard!
           </div>
         )}
         {showLoggedOutPopup && (
-          <div className="fixed bottom-4 right-4">
-            <div className="bg-red-500 bg-opacity-100 text-white p-4 rounded">
-              You have been logged out!
-            </div>
+          <div className="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded font-lato ">
+            <div className="">You have been logged out!</div>
           </div>
         )}
       </div>
