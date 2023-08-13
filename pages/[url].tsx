@@ -7,6 +7,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const { url } = ctx.params as { url: string };
     const dto: UrlDto = await getFullUrl(url);
+    if (!dto.isActive) {
+      return { notFound: true };
+    }
     return { props: { dto } };
   } catch (err) {
     return { notFound: true };
