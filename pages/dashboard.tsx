@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 };
 
-const dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
+const Dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
   const router = useRouter();
   const [urls, setUrls] = useState<UrlDto[]>([]);
   const [qrCode, setQrCode] = useState<string>("");
@@ -57,23 +57,23 @@ const dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
   const [showSuccessfulDelete, setShowSuccessfulDelete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-    setIsLoading(true);
+  // useEffect(() => {
+  //   if (!user) {
+  //     return;
+  //   }
+  //   setIsLoading(true);
 
-    getUsersUrls()
-      .then((res) => {
-        setUrls(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+  //   getUsersUrls()
+  //     .then((res) => {
+  //       setUrls(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // });
 
   useEffect(() => {
     if (!user) {
@@ -88,7 +88,7 @@ const dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [showSuccessfulDelete]);
+  }, [showSuccessfulDelete, user]);
 
   const onClickQr = async (url: string) => {
     try {
@@ -244,4 +244,4 @@ const dashboard: React.FC<{ user: UserDto }> = ({ user }) => {
   );
 };
 
-export default dashboard;
+export default Dashboard;

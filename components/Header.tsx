@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 import MenuIcon from "@mui/icons-material/Menu";
+import Link from "next/link";
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -22,7 +23,7 @@ const Header = () => {
     <header className=" bg-light_blue">
       <nav className="mx-auto flex max-w-7xl py-2 px-4 justify-between items-center">
         <div className="flex lg:flex-1">
-          <a href="/" className="">
+          <Link href="/" className="">
             <span>
               <img
                 className="bg-transparent h-16 w-auto"
@@ -30,7 +31,7 @@ const Header = () => {
                 alt="logo"
               />
             </span>
-          </a>
+          </Link>
         </div>
         <button
           className="sm:hidden hover:text-gray-600 focus:outline-none"

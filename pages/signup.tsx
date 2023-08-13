@@ -6,7 +6,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const signup = () => {
+const Signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -150,4 +150,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;

@@ -2,7 +2,7 @@ import { useAuth } from "@/components/AuthContext";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-const logout = () => {
+const Logout = () => {
   const { logout } = useAuth();
   const router = useRouter();
   // logout();
@@ -14,4 +14,4 @@ const logout = () => {
   return <div></div>;
 };
 
-export default logout;
+export default Logout;

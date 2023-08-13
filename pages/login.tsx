@@ -8,7 +8,7 @@ import { useAuth } from "@/components/AuthContext";
 import Head from "next/head";
 
 //TODO: some weird bug with auto fill not working
-const login = () => {
+const Login = () => {
   const usernameElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);
 
@@ -65,12 +65,14 @@ const login = () => {
       const token = data.token;
       const expires = moment().add(30, "minutes").toDate();
       Cookies.set("accessToken", token, { expires: expires, sameSite: "lax" });
-      setIsLoading(false);
+      // setIsLoading(false);
       setIsLoggedIn(true);
       router.push("/");
     } catch (err: any) {
       console.log(err.response);
       setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -162,4 +164,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
