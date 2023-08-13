@@ -14,8 +14,9 @@ Thanks for taking a look!
 2. Clone this repository:
    `git clone https://github.com/joenzkc/jsurvey-frontend.git`
 3. Run `npm i` to install dependencies
-4. Run your backend server, once that is up, do `npm run dev` to launch the frontend
-5. Visit (localhost:3000)[localhost:3000] to view your website
+4. Copy `.env.sample` and rename it to `.env`, fill in the necessary data
+5. Run your backend server, once that is up, do `npm run dev` to launch the frontend
+6. Visit (localhost:3000)[localhost:3000] to view your website
 
 ## Techstack
 
