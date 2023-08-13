@@ -41,7 +41,6 @@ const Signup = () => {
     try {
       setIsLoading(true);
       await signUp(name, password);
-      setIsLoading(false);
       setIsError(false);
       setUserTaken(false);
       setIsSignedUp(true);
@@ -58,10 +57,13 @@ const Signup = () => {
         });
       }, 1000);
     } catch (err: any) {
-      if (err.response.data.errorType === "QueryFailedError") {
+      if (err.response.data.code === "23505") {
         setUserTaken(true);
+      } else {
+        setIsError(true);
       }
-      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
